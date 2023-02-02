@@ -6,7 +6,13 @@
 * Author: Ethan Garnier
 */
 #include <iostream>
+#include <chrono>
 #include "opencv2/opencv.hpp"
+
+void find_brightest_spot(cv::Mat oldImg, cv::Mat& newImg)
+{
+	cv::GaussianBlur(oldImg, newImg, cv::Size(5, 5), 0);
+}
 
 int main()
 {
@@ -19,6 +25,9 @@ int main()
 
 	for (;;)
 	{
+		// Begin timing of image processing
+		auto start = std::chrono::high_resolution_clock::now();
+
 		// Where we store the frame
 		cv::Mat frame;
 
@@ -27,8 +36,16 @@ int main()
 		
 
 		// DO PROCESSING HERE
+		cv::Mat processedImg;
+		find_brightest_spot(frame, processedImg);
 
-		cv::imshow("frame capture", frame);
+		cv::imshow("frame capture", processedImg);
+
+		
+		// Stop timing and print result
+		auto stop = std::chrono::high_resolution_clock::now();
+		auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+		std::cout << "Processing Time: " << duration.count() << std::endl;
 
 		// Wait 16 ms (roughly 60FPS)
 		// before processing the next frame. If the user
