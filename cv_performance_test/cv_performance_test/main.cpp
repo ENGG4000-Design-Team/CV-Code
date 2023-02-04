@@ -76,12 +76,12 @@ int main()
 		auto d = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
 		durations.push_back(std::chrono::duration<double>(d).count());
 
-		//cv::imshow("frame capture", frame);
+		cv::imshow("frame capture", frame);
 
 		// Wait 16 ms (roughly 60FPS)
 		// before processing the next frame. If the user
 		// presses a key then the program stops.
-		//if (cv::waitKey(16) >= 0) break;
+		if (cv::waitKey(16) >= 0) break;
 	}
 
 	// Print average processing time
