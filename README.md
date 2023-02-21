@@ -14,17 +14,20 @@ Below is a basic, to-the-point list of commands for compiling and installing Ope
 9. ```sudo apt install python3-dev python3-pip python3-numpy```
 
 The next step requires temporarily increasing the swap size of the OS on the Raspberry Pi. This can and will be reverted once we are done compiling OpenCV.
+
 10. ```sudo nano /etc/dphys-swapfile```
 11. In this file, replace the line ```CONF_SWAPSIZE=100``` with ```CONF_SWAPSIZE=3072``` When done, save the file by pressing CTRL+X followed by Y then ENTER.
 12. ```sudo systemctl restart dphys-swapfile```
 
 Next we must clone the OpenCV code repositories. This may take a while based on your internet connections.
+
 13. ```git clone https://github.com/opencv/opencv.git```
 14. ```git clone https://github.com/opencv/opencv_contrib.git```
 15. ```mkdir ~/opencv/build```
 16. ```cd ~/opencv/build```
 
 Configure the makefile.
+
 17. ```cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
@@ -38,11 +41,15 @@ Configure the makefile.
     -D BUILD_EXAMPLES=OFF ..```
 
 Next we compile OpenCV. If the compilation process fails, try running without -j$(nproc). This process can take upwards of an hour.
+
 18. ```make -j$(nproc)```
 Once compilation has completed, install OpenCV with this command.
+
 19. ```sudo make install```
 20. ```sudo ldconfig```
+
 Once we are finished, revert changes made to the OS swap size.
+
 21. ```sudo nano /etc/dphys-swapfile```
 22. In this file, replace the line ```CONF_SWAPSIZE=3072``` with ```CONF_SWAPSIZE=100``` When done, save the file by pressing CTRL+X followed by Y then ENTER.
 23. ```sudo systemctl restart dphys-swapfile```
