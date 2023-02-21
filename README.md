@@ -28,7 +28,8 @@ Next we must clone the OpenCV code repositories. This may take a while based on 
 
 Configure the makefile.
 
-17. ```cmake -D CMAKE_BUILD_TYPE=RELEASE \
+17. ```
+    cmake -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
     -D OPENCV_EXTRA_MODULES_PATH=~/opencv_contrib/modules \
     -D ENABLE_NEON=ON \
@@ -40,10 +41,11 @@ Configure the makefile.
     -D OPENCV_PYTHON_INSTALL_PATH=lib/python3.9/dist-packages \
     -D BUILD_EXAMPLES=OFF ..```
 
-Next we compile OpenCV. If the compilation process fails, try running without -j$(nproc). This process can take upwards of an hour.
+Next we compile OpenCV. If the compilation process fails, try running without ```-j$(nproc)```. This process can take upwards of an hour.
 
 18. ```make -j$(nproc)```
-Once compilation has completed, install OpenCV with this command.
+
+Once compilation has completed, install OpenCV with these commands.
 
 19. ```sudo make install```
 20. ```sudo ldconfig```
@@ -55,10 +57,16 @@ Once we are finished, revert changes made to the OS swap size.
 23. ```sudo systemctl restart dphys-swapfile```
 
 ## Testing OpenCV Installation
-To test your OpenCV installation, attempt to import OpenCV in a python script.
+To test your OpenCV installation, open a Python shell:
+
 ```python3```
+
+And attempt to import OpenCV.
+
 ```import cv2```
+
 ```cv2.__version__```
+
 If everything was correctly installed, you will see the installed OpenCV version printed to your terminal.
 
 Author: Ethan Garnier
