@@ -67,6 +67,8 @@ int main()
 
 		// Capture frame and store it in Mat
 		cap >> frame;
+
+		cv::flip(frame, frame, 0);
 		
 		// DO PROCESSING HERE
 		find_brightest_spot(frame, 5);
